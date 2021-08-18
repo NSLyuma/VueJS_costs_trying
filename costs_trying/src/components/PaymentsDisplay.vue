@@ -1,7 +1,7 @@
 <template>
   <div>
     <div v-for="(item, i) in list" :key="i">
-      {{ i }} - {{ item.id }}. {{ item.date }} {{ item.category }}
+      {{ item.id }}. {{ item.date }} {{ item.category }}
       {{ item.value }}
     </div>
   </div>
