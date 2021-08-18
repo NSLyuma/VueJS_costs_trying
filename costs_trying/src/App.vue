@@ -1,107 +1,95 @@
 <template>
   <div id="app">
     <header>My personal costs</header>
+    <AddPaymentForm @addItem="addNewData" />
     <PaymentsDisplay :list="paymentsList" />
     <div>Total value: {{ totalValue }}</div>
   </div>
 </template>
 
 <script>
+import AddPaymentForm from "./components/AddPaymentForm.vue";
 import PaymentsDisplay from "./components/PaymentsDisplay.vue";
 export default {
   name: "App",
-  components: { PaymentsDisplay },
+  components: { PaymentsDisplay, AddPaymentForm },
   data() {
     return {
-      paymentsList: {},
+      paymentsList: [],
     };
   },
   methods: {
     fetchData() {
-      return {
-        page1: [
-          {
-            id: 1,
-            date: "13.08.2021",
-            category: "Food",
-            value: 100,
-          },
-          {
-            id: 2,
-            date: "13.08.2021",
-            category: "Food",
-            value: 200,
-          },
-          {
-            id: 3,
-            date: "13.08.2021",
-            category: "Food",
-            value: 300,
-          },
-          {
-            id: 4,
-            date: "13.08.2021",
-            category: "Food",
-            value: 400,
-          },
-          {
-            id: 5,
-            date: "13.08.2021",
-            category: "Food",
-            value: 500,
-          },
-        ],
-        page2: [
-          {
-            id: 6,
-            date: "13.08.2021",
-            category: "Food",
-            value: 100,
-          },
-          {
-            id: 7,
-            date: "13.08.2021",
-            category: "Food",
-            value: 200,
-          },
-          {
-            id: 8,
-            date: "13.08.2021",
-            category: "Food",
-            value: 300,
-          },
-          {
-            id: 9,
-            date: "13.08.2021",
-            category: "Food",
-            value: 400,
-          },
-          {
-            id: 10,
-            date: "13.08.2021",
-            category: "Food",
-            value: 500,
-          },
-        ],
-      };
+      return [
+        {
+          id: 1,
+          date: "13.08.2021",
+          category: "Food",
+          value: 100,
+        },
+        {
+          id: 2,
+          date: "13.08.2021",
+          category: "Food",
+          value: 200,
+        },
+        {
+          id: 3,
+          date: "13.08.2021",
+          category: "Food",
+          value: 300,
+        },
+        {
+          id: 4,
+          date: "13.08.2021",
+          category: "Food",
+          value: 400,
+        },
+        {
+          id: 5,
+          date: "13.08.2021",
+          category: "Food",
+          value: 500,
+        },
+        {
+          id: 6,
+          date: "13.08.2021",
+          category: "Food",
+          value: 100,
+        },
+        {
+          id: 7,
+          date: "13.08.2021",
+          category: "Food",
+          value: 200,
+        },
+        {
+          id: 8,
+          date: "13.08.2021",
+          category: "Food",
+          value: 300,
+        },
+        {
+          id: 9,
+          date: "13.08.2021",
+          category: "Food",
+          value: 400,
+        },
+        {
+          id: 10,
+          date: "13.08.2021",
+          category: "Food",
+          value: 500,
+        },
+      ];
+    },
+    addNewData(newItem) {
+      this.paymentsList.push(newItem);
     },
   },
   computed: {
-    numberOfPages() {
-      return Object.keys(this.paymentsList);
-    },
     totalValue() {
-      let sum = 0;
-      for (let page in this.paymentsList) {
-        //перебор объекта по ключам
-        let preSum = this.paymentsList[page].reduce(
-          //вычисление суммы каждой страницы
-          (acc, cur) => (acc += cur.value),
-          0
-        );
-        sum += preSum;
-      }
-      return sum;
+      return this.paymentsList.reduce((acc, cur) => (acc += cur.value), 0);
     },
   },
   created() {

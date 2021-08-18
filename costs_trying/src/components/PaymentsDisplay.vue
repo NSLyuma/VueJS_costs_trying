@@ -1,11 +1,8 @@
 <template>
   <div>
-    <div v-for="(page, i) in list" :key="i">
-      {{ i }}:
-      <div v-for="item in page" :key="item.id">
-        {{ item.id }}. {{ item.date }} {{ item.category }}
-        {{ item.value }}
-      </div>
+    <div v-for="(item, i) in list" :key="i">
+      {{ i }} - {{ item.id }}. {{ item.date }} {{ item.category }}
+      {{ item.value }}
     </div>
   </div>
 </template>
@@ -15,8 +12,8 @@ export default {
   name: "PaymentsDisplay",
   props: {
     list: {
-      type: Object,
-      default: () => {},
+      type: Array,
+      default: () => [],
     },
   },
 };
