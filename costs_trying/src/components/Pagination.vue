@@ -1,10 +1,22 @@
 <template>
-  <div class="pages-box">
-    <button @click="onClick(currentPage - 1)">&#60;</button>
-    <div v-for="page in numberOfPages" :key="page">
-      <div class="page" @click="onClick(page)">{{ page }}</div>
+  <div :class="[$style.wrp]">
+    <button :class="[$style.btn]" @click="onClick(currentPage - 1)">
+      &#60;
+    </button>
+    <div
+      :class="{
+        [$style.active]: currentPage === page,
+      }"
+      v-for="page in numberOfPages"
+      :key="page"
+    >
+      <div :class="[$style.page]" @click="onClick(page)">
+        {{ page }}
+      </div>
     </div>
-    <button @click="onClick(currentPage + 1)">&#62;</button>
+    <button :class="[$style.btn]" @click="onClick(currentPage + 1)">
+      &#62;
+    </button>
   </div>
 </template>
 
@@ -22,6 +34,8 @@ export default {
       else {
         this.$emit("onClick", page);
       }
+      let curPage = document.getElementById("p");
+      curPage.classList.add("page-bg");
     },
   },
   computed: {
@@ -32,16 +46,23 @@ export default {
 };
 </script>
 
-<style scoped>
-.pages-box {
+<style module lang="scss">
+.wrp {
   display: flex;
+  & > div {
+    &.active {
+      background: #ccc;
+    }
+  }
+}
+
+.btn {
+  padding: 10px;
+  cursor: pointer;
 }
 
 .page {
-  margin-right: 10px;
-  margin-left: 10px;
-  border: 1px solid black;
-  padding: 5px;
   cursor: pointer;
+  padding: 10px;
 }
 </style>
